@@ -283,3 +283,24 @@ hardware, this changes to
 
 </para>
   </sect2>
+
+
+  <sect2 arch="ppc64el"> <title>Booting a ppc64el machine</title>
+<para>
+        How to boot a ppc64el machine 
+</para>
+
+  <sect3> <title>Petitboot</title>
+<para>
+        explain a little bit about petitboot
+</para>
+  </sect3>
+
+  <sect3> <title>Boot parameters</title>
+<para>
+        Boot parameters for ppc64el
+</para>
+  </sect3>
+
+  </sect2>
+

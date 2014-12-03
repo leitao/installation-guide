@@ -1,0 +1,11 @@
+  <sect3 arch="ppc64el">
+  <title>Install <command>GRUB2</command> on a Hard Disk</title>
+<para>
+
+The boot loader for Power systems machines is
+<command>GRUB2</command>.  
+
+blablabla
+
+</para>
+  </sect3>

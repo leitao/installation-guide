@@ -50,3 +50,33 @@ installed to nvram.
 
 </para>
   </sect2>
+
+
+  <sect2 arch="ppc64el" id="update-firmware">
+  <title> How to update bare metal ppc64el firmware </title>
+<para>
+	blablabla
+</para>
+
+<sect2 arch="ppc64el"> <title>Updating KVM guest firmware (SLOF)</title>
+<para>
+  blablabla
+</para>
+</sect2>
+
+<sect2 arch="ppc64el"> <title>Updating PowerKVM hypervisor</title>
+<para>
+  blablabla
+</para>
+</sect2>
+
+<sect2 arch="ppc64el"> <title>Updating PowerVM hypervisor</title>
+<para>
+  blablabla
+</para>
+</sect2>
+
+
+
+  </sect2>
+
