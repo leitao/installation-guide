@@ -73,10 +73,10 @@ unpack it into some directory within your HTTP server www root
 structure (say wwwroot):
 
 <informalexample><screen>
-# cd <directory-where-the-iso-is>
+# cd &lt;directory-where-the-iso-is&gt;
 # mkdir ./iso
 # sudo mount -o loop ibm-powerkvm-*-ppc64-service-*.iso ./iso
-# cp -a ./iso/* <path-to-wwwroot>
+# cp -a ./iso/* &lt;path-to-wwwroot&gt;
 </screen></informalexample>
 
 Create the petitboot.conf file in a directory under your tftproot, say
@@ -103,10 +103,10 @@ Add the system directive:
 
 <informalexample><screen>
 host <your-system> {
-    hardware ethernet <system macaddr>
-    fixed-address <system ip>;
-    option host-name "<system hostname>";
-    option conf-file "<powerkvm/petitboot.conf>";
+    hardware ethernet &lt;system macaddr&gt;
+    fixed-address &lt;system ip&gt;;
+    option host-name "&lt;system hostname&gt;";
+    option conf-file "&lt;powerkvm/petitboot.conf&gt;";
  }
 </screen></informalexample>
 
