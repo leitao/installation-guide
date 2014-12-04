@@ -65,9 +65,75 @@ installed to nvram.
 </sect2>
 
 <sect2 arch="ppc64el"> <title>Updating PowerKVM hypervisor</title>
+  <sect3 arch="ppc64el"> <title>Instructions for Netboot installation</title>
 <para>
-  blablabla
+You will need a DHCP/TFTP (BOOTP) server, as well as a web server.
+After downloading ibm-powerkvm-*-ppc64-service-*.iso, mount loop it and
+unpack it into some directory within your HTTP server www root 
+structure (say wwwroot):
+
+<informalexample><screen>
+# cd <directory-where-the-iso-is>
+# mkdir ./iso
+# sudo mount -o loop ibm-powerkvm-*-ppc64-service-*.iso ./iso
+# cp -a ./iso/* <path-to-wwwroot>
+</screen></informalexample>
+
+Create the petitboot.conf file in a directory under your tftproot, say
+/tftproot/powerkvm, with the following contents:
+
+<informalexample><screen>
+label PowerKVM Automated Install
+kernel http://YOUR-SERVER-IP/SOME-PATH-TO-wwwroot/ppc/ppc64/vmlinuz
+initrd http://YOUR-SERVER-IP/SOME-PATH-TO-wwwroot/ppc/ppc64/initrd.img
+append root=live:http://YOUR-SERVER-IP/SOME-PATH-TO-wwwroot/LiveOS/squashfs.img repo=http://YOUR-SERVER-IP/SOME-PATH-TO-wwwroot/packages rd.dm=0 rd.md=0 console=hvc0 console=tty0
+</screen></informalexample>
+
+Edit your dhcpd.conf
+
+</para><para>
+
+Set this directive at the beginning:
+
+<informalexample><screen>
+option conf-file code 209 = text;
+</screen></informalexample>
+
+Add the system directive:
+
+<informalexample><screen>
+host <your-system> {
+    hardware ethernet <system macaddr>
+    fixed-address <system ip>;
+    option host-name "<system hostname>";
+    option conf-file "<powerkvm/petitboot.conf>";
+ }
+</screen></informalexample>
+
+Reboot the dhcp server.
+</para><para>
+Boot your PowerLinux machine.
+</para><para>
+There should be the following option at petitboot (select it):
+<informalexample><screen>
+"Power KVM Automated Install" 
+</screen></informalexample>
+The installer menu should appear automatically.
 </para>
+</sect3>
+
+<sect3 arch="ppc64el"> <title>Instructions for DVD</title>
+<para>
+Boot the ISO ibm-powerkvm-*-ppc64-service-*.iso (either burn a DVD or
+make it virtual if using QEMU) and simply wait for the boot.
+</para><para>
+There should be the following option at petitboot (select it):
+<informalexample><screen>
+"POWERKVM_LIVECD" 
+</informalexample></screen>
+The installer menu should appear automatically.
+</para>
+</sect3>
 </sect2>
 
 <sect2 arch="ppc64el"> <title>Updating PowerVM hypervisor</title>
