@@ -102,7 +102,7 @@ option conf-file code 209 = text;
 Add the system directive:
 
 <informalexample><screen>
-host <your-system> {
+host &lt;your-system&gt; {
     hardware ethernet &lt;system macaddr&gt;
     fixed-address &lt;system ip&gt;;
     option host-name "&lt;system hostname&gt;";
@@ -130,7 +130,7 @@ make it virtual if using QEMU) and simply wait for the boot.
 There should be the following option at petitboot (select it):
 <informalexample><screen>
 "POWERKVM_LIVECD" 
-</informalexample></screen>
+</screen></informalexample>
 The installer menu should appear automatically.
 </para>
 </sect3>
@@ -141,8 +141,5 @@ The installer menu should appear automatically.
   blablabla
 </para>
 </sect2>
-
-
-
   </sect2>
 
