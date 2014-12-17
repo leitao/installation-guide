@@ -51,16 +51,126 @@ installed to nvram.
 </para>
   </sect2>
 
-
-  <sect2 arch="ppc64el" id="update-firmware">
-  <title> How to update bare metal ppc64el firmware </title>
+ <sect2 arch="ppc64el;powerpc" id="update-firmware">
+ <title> How to update bare metal ppc64el firmware </title>
 <para>
-	blablabla
+This is an excerpt from <ulink url="&url-ibm-powerkvm;">IBM PowerKVM on IBM POWER8</ulink>
+</para><para>
+Open Power Abstraction Layer (OPAL) is the system firmware in the stack
+of POWER processor-based server.
+</para><para>
+There may be instances when the user might have to upgrade the Power
+Systems firmware to a more recent level to acquire new features or
+additional support for devices.
+</para><para>
+Make sure that the following requirements are met.
+
+<itemizedlist>
+<listitem><para>
+    An OS to be running on the system
+</para></listitem><listitem><para>
+    The .img file of the OPAL level that the user needs to update to.
+</para></listitem><listitem><para>
+    The machine isn't under HMC control.
+</para></listitem>
+</itemizedlist>
+</para><para>
+Power Systems has two sides of flash to boot firmware from, namely
+permanent and temporary. This provides a way to test firmware updates on
+the temporary side of the flash before committing the tested changes to
+the permanent side, thereby committing the new updates.
+</para><para>
+Perform the following steps for the update:
+
+<orderedlist>
+<listitem><para>
+    Save the level of the existing firmware before really updating. In
+ASM, in the system menu, click <command>Service Aids ➟ Service Processor
+Command Line</command>, and run the following command:
+<informalexample><screen>
+     cupdcmd -f
+</screen></informalexample>
+</para></listitem><listitem><para>
+    Download the .img file of the level of firmware to be updated to a
+location in the host filesystem. Refer to IBM Fix Central for downloading
+the image file.
+</para><para>
+    Verify the image downloaded by running the following command and
+save the output.
+<informalexample><screen>
+     $update_flash -v -f &lt;file name.img&gt;
+</screen></informalexample>
+</para></listitem><listitem>
+<para>
+    Update the firmware by running the following command.
+<informalexample><screen>
+     $update_flash -f &lt;file name.img&gt;
+</screen></informalexample>
 </para>
 
-<sect2 arch="ppc64el"> <title>Updating KVM guest firmware (SLOF)</title>
+<note><para>
+
+ <itemizedlist>
+ <listitem><para>
+        The command reboots the system and therefore, sessions if any,
+would be lost.
+ </para></listitem><listitem><para>
+        Do not reboot or switch off the system until it is back.
+ </para></listitem>
+ </itemizedlist>
+
+</para></note>
+
+</listitem><listitem><para>
+    Verify the updated firmware level of the temporary side of the flash
+as in step 1. 
+</para></listitem><listitem><para>
+    In case the update has to be reverted, the user can do so by running
+the command.
+<informalexample><screen>
+    $update_flash -r
+</screen></informalexample>
+    Rejection would reject only the temporary side of the flash. 
+Therefore, the new level should be committed to the permanent side only
+after thorough testing of the new firmware.
+</para><para>
+    The new updated level can be committed to the permanent side of the
+flash by running the following command.
+<informalexample><screen>
+    $update_flash -c
+</screen></informalexample>
+</para></listitem>
+</orderedlist>
+
+</para>
+
+<sect2 arch="ppc64el;powerpc"> 
+<title>Updating KVM guest firmware (SLOF)</title>
 <para>
-  blablabla
+ Slimline Open Firmware (SLOF) is an implementation of the IEEE 1275 
+standard. 
+ It can be used as partition firmware for pSeries machines running on
+QEMU or KVM.
+</para><para>
+The package qemu-slof is, in fact, a dependency of package 
+qemu-system-ppc (which also provides the virtual package 
+qemu-system-ppc64), and can be installed or updated via 
+<command>apt-get</command> tool on Debian-based distros.
+Like so:
+
+<informalexample><screen>
+# apt-get install qemu-slof
+</screen></informalexample>
+
+SLOF can also be installed into rpm-based distribution systems, given 
+the proper repository or rpm package. Additionally, the upstream source 
+code is available at http://github.com/leilihh/SLOF
+</para><para>
+Thus, one can use a different SLOF file rather than the default, when
+running <command>qemu-system</command>, by adding the command line
+argument <userinput>-bios &lt;slof file&gt; </userinput> when running
+qemu.
+
 </para>
 </sect2>
 
